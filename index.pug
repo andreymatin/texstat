@@ -1,0 +1,261 @@
+doctype html
+html(lang="en")
+  head
+    title texstat
+    meta(charset="utf-8")
+    meta(name="viewport", content="width=device-width, initial-scale=1, shrink-to-fit=no")
+
+    //- Bootstrap CSS
+    link(rel="stylesheet", href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.2/css/bootstrap.min.css", integrity="sha384-Smlep5jCw/wG7hdkwQ/Z5nLIefveQRIY9nfy6xoR1uRYBtpZgI6339F5dgvm/e9B", crossorigin="anonymous")
+
+  body
+
+    //- Header
+    .container
+      .row
+        .col
+          header.header
+            h1 texstat v.1
+            p.lead Light content analyzer
+
+    //- Textarea
+    .container
+      .row
+        .col
+          ul.list-unstyled
+            li
+              .form-group
+                label(for="textarea") Source
+                textarea#textarea.form-control.rounded-0(rows="10").
+                  Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                  Error non sed nulla fuga molestias incidunt,
+                  assumenda quos architecto saepe voluptatibus sint
+                  dolorem magnam sapiente. Corrupti fuga ipsum nesciunt culpa iusto!
+
+            li
+              button.btn.btn-primary#check Check
+
+    //- Parameters
+    .container
+      .row
+        .col
+          h2 Parameters
+
+          table.table
+            thead
+              th.col-sm-3 Title
+              th Value
+            tbody
+              tr
+                td Lines:
+                td <span id="lines"></span>
+
+              tr
+                td Pages:
+                td <span id="pages"></span>
+
+              tr
+                td Characters:
+                td <span id="chars"></span>
+
+              tr
+                td Symbols:
+                td <span id="symbols"></span>
+
+              tr
+                td Words:
+                td <span id="words"></span>
+
+          h2 Statistics
+
+          table.table
+            thead
+              th.col-sm-3 Title
+              th Value
+            tbody
+              tr
+                td Unique Words:
+                td <span id="wordsUniq"></span>
+
+              tr
+                td Important Words:
+                td <span id="wordsImportant"></span>
+
+              tr
+                td Stop Words:
+                td <span id="wordsStop"></span>
+
+              tr
+                td Sentences:
+                td <span id="sentences"></span>
+
+              tr
+                td Spaces:
+                td <span id="spaces"></span>
+
+              tr
+                td Syllables:
+                td <span id="syllables"></span>
+
+              tr
+                td Auto Lines:
+                td <span id="linesBook"></span>
+
+    //- Chart
+    .container
+      .row
+        .col
+          h2 Chart
+          canvas(id="chart", width="100", height="40")
+
+
+    //- Extra Statistics
+    .container
+      .row
+        .col
+          h2 Extra Statistics
+
+          table.table
+            thead
+              th.col-sm-3 Title
+              th Value
+            tbody
+              tr
+                td SEO Water:
+                td <span id="water"></span>%
+
+              tr
+                td Quality:
+                td <span id="quality"></span>%
+
+              tr
+                td Complexity factor (Lexical Density)
+                td <span id="cf"></span>%
+
+              tr
+                td Average words per sentence:
+                td <span id="wordsAveragePerSentence"></span>
+
+              tr
+                td Average Word Length:
+                td <span id="wordAverageLength"></span>
+
+              tr
+                td Complex words:
+                td <span id="wordsComplex"></span>
+
+
+    //- Readability
+    .container
+      .row
+        .col
+          h2 Readability
+
+          table.table
+            thead
+              th.col-sm-3 Title
+              th Value
+            tbody
+              tr
+                td Gunning Fog Index:
+                td <span id="gfi"></span>
+              tr
+                td Coleman-Liau Index:
+                td <span id="cli"></span>
+              tr
+                td Automated Readability Index:
+                td <span id="ari"></span>
+              tr
+                td SMOG grade:
+                td <span id="smog"></span>
+              tr
+                td Flesch–Kincaid grade:
+                td <span id="fk"></span>
+              tr
+                td Flesch Reading Ease:
+                td <span id="fre"></span>
+
+
+    //- Readability
+    .container
+      .row
+        .col
+          h2 Reading Time
+          table.table
+            thead
+              th.col-sm-3 Title
+              th Value
+            tbody
+              tr
+                td Estimated Reading Time
+                td <span id="ert"></span> min
+
+
+
+    //- Orfography
+    .container
+      .row
+        .col
+          h2 Orfography
+          table.table
+            thead
+              th.col-sm-3 Title
+              th Value
+            tbody
+              tr
+                td Warnings
+                td <span id="orfography"></span>
+
+
+    //- Inspiration
+    .container
+      .row
+        .col
+          h2 Inspiration
+
+          ul
+            li
+              a(href="https://en.wikipedia.org/wiki/Computational_linguistics") https://en.wikipedia.org/wiki/Computational_linguistics
+            li
+              a(href="http://www.readabilityformulas.com/") http://www.readabilityformulas.com/
+            li
+              a(href="https://en.wikipedia.org/wiki/Lexical_density") https://en.wikipedia.org/wiki/Lexical_density
+            li
+              a(href="https://marketingland.com/estimated-reading-times-increase-engagement-79830") https://marketingland.com/estimated-reading-times-increase-engagement-79830
+            li
+              a(href="https://charactercounttool.com/") https://charactercounttool.com/
+            li
+              a(href="http://textalyser.net/") http://textalyser.net/
+            li
+              a(href="https://approsto.com/text-statistics/") https://approsto.com/text-statistics/
+
+
+    //- Inspiration
+    .container
+      .row
+        .col
+          h2 Inside
+
+          ul
+            li jQuery 3
+            li Bootstrap 4
+            li lodash 4
+            li yarn / grunt / pug / sass
+            li chart.js
+
+    //- Scripts
+    script(
+			  src="https://code.jquery.com/jquery-3.3.1.min.js",
+			  integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=",
+			  crossorigin="anonymous")
+    script(src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js", integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49", crossorigin="anonymous")
+    script(src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.2/js/bootstrap.min.js", integrity="sha384-o+RDsa0aLu++PJvFqy8fFScvbHFLtbvScb8AjopnFD+iEQ7wo/CG0xlczd+2O/em", crossorigin="anonymous")
+
+    //- Lodash
+    script(src="https://cdn.jsdelivr.net/npm/lodash@4.17.11/lodash.min.js")
+
+    //- Chart
+    script(src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.bundle.min.js")
+
+    //- Custom Script
+    script(src="js/app.js")
