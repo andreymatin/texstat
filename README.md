@@ -1,0 +1,2 @@
+# texstat
+Light content analyzer
