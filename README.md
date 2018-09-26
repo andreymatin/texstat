@@ -2,6 +2,8 @@
 
 Light content analyzer
 
+https://andreymatin.github.io/texstat/
+
 ## Features
 
 - Counting words, sentences and other data
