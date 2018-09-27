@@ -1,6 +1,6 @@
 # texstat
 
-Light content analyzer
+Content analyzer
 
 https://andreymatin.github.io/texstat/
 
