@@ -1,8 +1,6 @@
 # texstat
 
-Content analyzer
-
-https://andreymatin.github.io/texstat/
+Light content analyzer
 
 ## Features
 
@@ -10,3 +8,4 @@ https://andreymatin.github.io/texstat/
 - Calculate readability indexes
 - Orthographical warnings
 - Chart
+

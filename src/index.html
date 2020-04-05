@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <title>texstat</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+</head>
+
+<body>
+  <div class="container">
+    <div class="row">
+      <div class="col">
+        <header class="header">
+          <h1>texstat v.1</h1>
+          <p class="lead">Light content analyzer</p>
+        </header>
+      </div>
+    </div>
+  </div>
+  <div class="container">
+    <div class="row">
+      <div class="col">
+        <ul class="list-unstyled">
+          <li>
+            <div class="form-group"><label for="textarea">Source</label><textarea class="form-control rounded-0" id="textarea" rows="10">Lorem ipsum dolor sit amet consectetur adipisicing elit.
+Error non sed nulla fuga molestias incidunt,
+assumenda quos architecto saepe voluptatibus sint
+dolorem magnam sapiente. Corrupti fuga ipsum nesciunt culpa iusto!
+</textarea></div>
+          </li>
+          <li><button class="btn btn-primary" id="check">Check</button></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div class="container">
+    <div class="row">
+      <div class="col">
+        <h2>Parameters</h2>
+        <table class="table">
+          <thead>
+            <th class="col-sm-3">Title</th>
+            <th>Value</th>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Lines:</td>
+              <td><span id="lines"></span></td>
+            </tr>
+            <tr>
+              <td>Pages:</td>
+              <td><span id="pages"></span></td>
+            </tr>
+            <tr>
+              <td>Characters:</td>
+              <td><span id="chars"></span></td>
+            </tr>
+            <tr>
+              <td>Symbols:</td>
+              <td><span id="symbols"></span></td>
+            </tr>
+            <tr>
+              <td>Words:</td>
+              <td><span id="words"></span></td>
+            </tr>
+          </tbody>
+        </table>
+        <h2>Statistics</h2>
+        <table class="table">
+          <thead>
+            <th class="col-sm-3">Title</th>
+            <th>Value</th>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Unique Words:</td>
+              <td><span id="wordsUniq"></span></td>
+            </tr>
+            <tr>
+              <td>Important Words:</td>
+              <td><span id="wordsImportant"></span></td>
+            </tr>
+            <tr>
+              <td>Stop Words:</td>
+              <td><span id="wordsStop"></span></td>
+            </tr>
+            <tr>
+              <td>Sentences:</td>
+              <td><span id="sentences"></span></td>
+            </tr>
+            <tr>
+              <td>Spaces:</td>
+              <td><span id="spaces"></span></td>
+            </tr>
+            <tr>
+              <td>Syllables:</td>
+              <td><span id="syllables"></span></td>
+            </tr>
+            <tr>
+              <td>Auto Lines:</td>
+              <td><span id="linesBook"></span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+  <div class="container">
+    <div class="row">
+      <div class="col">
+        <h2>Chart</h2><canvas id="chart" width="100" height="40"></canvas>
+      </div>
+    </div>
+  </div>
+  <div class="container">
+    <div class="row">
+      <div class="col">
+        <h2>Extra Statistics</h2>
+        <table class="table">
+          <thead>
+            <th class="col-sm-3">Title</th>
+            <th>Value</th>
+          </thead>
+          <tbody>
+            <tr>
+              <td>SEO Water:</td>
+              <td><span id="water"></span>%</td>
+            </tr>
+            <tr>
+              <td>Quality:</td>
+              <td><span id="quality"></span>%</td>
+            </tr>
+            <tr>
+              <td>Complexity factor (Lexical Density)</td>
+              <td><span id="cf"></span>%</td>
+            </tr>
+            <tr>
+              <td>Average words per sentence:</td>
+              <td><span id="wordsAveragePerSentence"></span></td>
+            </tr>
+            <tr>
+              <td>Average Word Length:</td>
+              <td><span id="wordAverageLength"></span></td>
+            </tr>
+            <tr>
+              <td>Complex words:</td>
+              <td><span id="wordsComplex"></span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+  <div class="container">
+    <div class="row">
+      <div class="col">
+        <h2>Readability</h2>
+        <table class="table">
+          <thead>
+            <th class="col-sm-3">Title</th>
+            <th>Value</th>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Gunning Fog Index:</td>
+              <td><span id="gfi"></span></td>
+            </tr>
+            <tr>
+              <td>Coleman-Liau Index:</td>
+              <td><span id="cli"></span></td>
+            </tr>
+            <tr>
+              <td>Automated Readability Index:</td>
+              <td><span id="ari"></span></td>
+            </tr>
+            <tr>
+              <td>SMOG grade:</td>
+              <td><span id="smog"></span></td>
+            </tr>
+            <tr>
+              <td>Flesch–Kincaid grade:</td>
+              <td><span id="fk"></span></td>
+            </tr>
+            <tr>
+              <td>Flesch Reading Ease:</td>
+              <td><span id="fre"></span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+  <div class="container">
+    <div class="row">
+      <div class="col">
+        <h2>Reading Time</h2>
+        <table class="table">
+          <thead>
+            <th class="col-sm-3">Title</th>
+            <th>Value</th>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Estimated Reading Time</td>
+              <td><span id="ert"></span> min</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+  <div class="container">
+    <div class="row">
+      <div class="col">
+        <h2>Orfography</h2>
+        <table class="table">
+          <thead>
+            <th class="col-sm-3">Title</th>
+            <th>Value</th>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Warnings</td>
+              <td><span id="orfography"></span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+  <div class="container">
+    <div class="row">
+      <div class="col">
+        <h2>Inspiration</h2>
+        <ul>
+          <li><a href="https://en.wikipedia.org/wiki/Computational_linguistics">https://en.wikipedia.org/wiki/Computational_linguistics</a></li>
+          <li><a href="http://www.readabilityformulas.com/">http://www.readabilityformulas.com/</a></li>
+          <li><a href="https://en.wikipedia.org/wiki/Lexical_density">https://en.wikipedia.org/wiki/Lexical_density</a></li>
+          <li><a href="https://marketingland.com/estimated-reading-times-increase-engagement-79830">https://marketingland.com/estimated-reading-times-increase-engagement-79830</a></li>
+          <li><a href="https://charactercounttool.com/">https://charactercounttool.com/</a></li>
+          <li><a href="http://textalyser.net/">http://textalyser.net/</a></li>
+          <li><a href="https://approsto.com/text-statistics/">https://approsto.com/text-statistics/</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div class="container">
+    <div class="row">
+      <div class="col">
+        <h2>Inside</h2>
+        <ul>
+          <li>yarn, Gulp (rollup, Babel), Bootstrap 4</li>
+          <li>Chart.js</li>
+          <li>Lodash 4</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <script src="//cdn.jsdelivr.net/npm/lodash@4.17.11/lodash.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
+  <script src="./build/js/app.js"></script>
+</body>
+
+</html>

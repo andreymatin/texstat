@@ -1,0 +1,19 @@
+- [ ] Asian characters and Korean Syllables
+- [ ] Selection / Document
+- [ ] Hard Words
+- [ ] % Correlations
+- [ ] Language papameters
+- [ ] Speed Readining by Symbols
+- [ ] Speed Readining configuration
+- [ ] Speed Speaking
+- [ ] Modules
+- [ ] Progress Bar
+- [ ] Data scrapping - list of the links, images, video, audio, summarization text, meta data
+- [ ] check data by url
+- [ ] Codemirror integration
+- [ ] Dummy WikiPedia Random Articles (example: https://en.wikipedia.org/w/api.php?format=json&action=query&generator=random&grnnamespace=0&prop=revisions|images&rvprop=content&grnlimit=10)
+- [ ] jQuery to JavaScript
+- [ ] Grunt to Gulp
+- [ ] Version control
+- [ ] Src URL input
+- [ ] Multilanguage
