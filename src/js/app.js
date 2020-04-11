@@ -60,7 +60,7 @@ document.addEventListener('DOMContentLoaded', function () {
   /**
    * Cache DOM Elements
    */
-  var textarea =  document.getElementById('textarea');
+  var textarea = document.getElementById('textarea');
   var str = textarea.value;
 
   var lines = document.getElementById('lines');
@@ -211,8 +211,18 @@ document.addEventListener('DOMContentLoaded', function () {
   var ertVal = getErt(wordsCount, wpm)
   ert.textContent = ertVal;
 
-  var orthographyWarning = getDataOrthography();
-  orfography.textContent = orthographyWarning;
+  /**
+   * Orthography
+   */
+  var orthographyWarning = getDataOrthography(str);
+  orthographyWarning.then(response => response) // 1
+    .then(val => {
+      orfography.textContent = val;
+    })
+    .catch(error => {
+      console.log(error);
+    });
+
 
   /**
    * Check Button

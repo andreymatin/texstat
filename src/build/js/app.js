@@ -406,34 +406,38 @@
    * Get Sentences Count
    */
   var getDataOrthography = function getDataOrthography(str) {
+    var orthography = 0;
     /**
      * Orfography
      * API: https://languagetool.org/http-api/swagger-ui/#/default
      */
-    // fetch("https://languagetool.org/api/v2/check", {
-    //     method: "POST",
-    //     headers: {
-    //       Accept: "application/json",
-    //       "Content-Type": "application/x-www-form-urlencoded"
-    //     },
-    //     data: {
-    //       text: 'dsfsdfsdfdsf',
-    //       language: 'auto',
-    //       enabledOnly: false
-    //     },
-    //     body: "text=ddsfdsfsdfdssdf&language=auto&enabledOnly=false",
-    //   }).then((response) => response.json())
-    //   .then((data) => {
-    //     var matches = data.matches;
-    //     var matchesLength = matches.length;
-    //     if (matchesLength > 0) {
-    //       orthography = matchesLength;
-    //     }
-    //     return orthography;
-    //   })
-    //   .catch((error) => {
-    //     return 0;
-    //   });
+
+    return fetch("https://languagetool.org/api/v2/check", {
+      method: "POST",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/x-www-form-urlencoded"
+      },
+      data: {
+        text: str,
+        language: 'auto',
+        enabledOnly: false
+      },
+      body: "text=" + str + "&language=auto&enabledOnly=false"
+    }).then(function (response) {
+      return response.json();
+    }).then(function (data) {
+      var matches = data.matches;
+      var matchesLength = matches.length;
+
+      if (matchesLength > 0) {
+        orthography = matchesLength;
+      }
+
+      return orthography;
+    })["catch"](function (error) {
+      return 0;
+    });
   };
 
   /**
@@ -575,8 +579,19 @@
 
     var ertVal = getErt(wordsCount, wpm);
     ert.textContent = ertVal;
-    var orthographyWarning = getDataOrthography();
-    orfography.textContent = orthographyWarning;
+    /**
+     * Orthography
+     */
+
+    var orthographyWarning = getDataOrthography(str);
+    orthographyWarning.then(function (response) {
+      return response;
+    }) // 1
+    .then(function (val) {
+      orfography.textContent = val;
+    })["catch"](function (error) {
+      console.log(error);
+    });
     /**
      * Check Button
      */
