@@ -30,7 +30,7 @@ import averageWordsLength from './services/average-words-length';
 import getComplexWords from './services/get-complex-words';
 import getLettersNumbers from './services/get-letters-numbers';
 
-import getGfi from './services/readability/get-gfi';
+import {getGfi, getGfiResult} from './services/readability/gfi';
 import getCli from './services/readability/get-cli';
 import getAri from './services/readability/get-ari';
 import getSmog from './services/readability/get-smog';
@@ -60,36 +60,39 @@ document.addEventListener('DOMContentLoaded', function () {
   /**
    * Cache DOM Elements
    */
-  var textarea = document.getElementById('textarea');
+  const textarea = document.getElementById('textarea');
   var str = textarea.value;
 
-  var lines = document.getElementById('lines');
-  var pages = document.getElementById('pages');
-  var chars = document.getElementById('chars');
-  var symbols = document.getElementById('symbols');
-  var words = document.getElementById('words');
-  var wordsUniq = document.getElementById('wordsUniq');
-  var wordsImportant = document.getElementById('wordsImportant');
-  var wordsStop = document.getElementById('wordsStop');
-  var water = document.getElementById('water');
-  var quality = document.getElementById('quality');
-  var sentences = document.getElementById('sentences');
-  var spaces = document.getElementById('spaces');
-  var syllables = document.getElementById('syllables');
-  var cf = document.getElementById('cf');
-  var wordsAveragePerSentence = document.getElementById('wordsAveragePerSentence');
-  var wordAverageLength = document.getElementById('wordAverageLength');
-  var wordsComplex = document.getElementById('wordsComplex');
-  var gfi = document.getElementById('gfi');
-  var cli = document.getElementById('cli');
-  var ari = document.getElementById('ari');
-  var smog = document.getElementById('smog');
-  var fk = document.getElementById('fk');
-  var fre = document.getElementById('fre');
-  var ert = document.getElementById('ert');
-  var orfography = document.getElementById('orfography');
-  var linesBook = document.getElementById('linesBook');
-  var check = document.getElementById('check');
+  const lines = document.getElementById('lines');
+  const pages = document.getElementById('pages');
+  const chars = document.getElementById('chars');
+  const symbols = document.getElementById('symbols');
+  const words = document.getElementById('words');
+  const wordsUniq = document.getElementById('wordsUniq');
+  const wordsImportant = document.getElementById('wordsImportant');
+  const wordsStop = document.getElementById('wordsStop');
+  const water = document.getElementById('water');
+  const quality = document.getElementById('quality');
+  const sentences = document.getElementById('sentences');
+  const spaces = document.getElementById('spaces');
+  const syllables = document.getElementById('syllables');
+  const cf = document.getElementById('cf');
+  const wordsAveragePerSentence = document.getElementById('wordsAveragePerSentence');
+  const wordAverageLength = document.getElementById('wordAverageLength');
+  const wordsComplex = document.getElementById('wordsComplex');
+
+  const gfi = document.getElementById('gfi');
+  const gfiResult = document.getElementById('gfiResult');
+
+  const cli = document.getElementById('cli');
+  const ari = document.getElementById('ari');
+  const smog = document.getElementById('smog');
+  const fk = document.getElementById('fk');
+  const fre = document.getElementById('fre');
+  const ert = document.getElementById('ert');
+  const orfography = document.getElementById('orfography');
+  const linesBook = document.getElementById('linesBook');
+  const check = document.getElementById('check');
 
   // Lines
   var linesCount = getLinesCount(str);
@@ -186,8 +189,9 @@ document.addEventListener('DOMContentLoaded', function () {
    * Readability
    */
 
-  var gfiVal = getGfi(wordsAveragePerSentenceVal, wordsComplexCount, wordsCount);
+  let gfiVal = getGfi(wordsCount, sentencesCount, wordsComplexCount);
   gfi.textContent = gfiVal;
+  gfiResult.textContent = getGfiResult(gfiVal);
 
   var cliVal = getCli(symbolsCount, wordsCount, sentencesCount);
   cli.textContent = cliVal;

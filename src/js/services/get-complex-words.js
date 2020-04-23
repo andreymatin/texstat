@@ -1,13 +1,13 @@
 /**
- * Get Quality
+ * Get Complex Words Count
  */
-const getComplexWords = function (wordsList) {
-  var wordsComplexCount = 0;
+const getComplexWords = (wordsList) => {
+  let wordsComplexCount = 0;
 
   for (var key in wordsList) {
     try {
       if (!/^[A-Z]/g.test(wordsList[key])) {
-        var wordSyllables = wordsList[key].match(/[aeuoi]/g).length - 1;
+        let wordSyllables = wordsList[key].match(/[aeiouy]/g).length - 1;
 
         if (/ing$/ig.test(wordsList[key]) || /ed$/ig.test(wordsList[key]) || /es$/ig.test(wordsList[key])) {
           wordSyllables--;
@@ -17,10 +17,9 @@ const getComplexWords = function (wordsList) {
           wordsComplexCount++;
         }
       }
-    } catch (er) {
-      wordsComplexCount = 0;
-    }
+    } catch (er) {}
   }
+
 
   return wordsComplexCount;
 }

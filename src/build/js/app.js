@@ -270,7 +270,7 @@
   };
 
   /**
-   * Get Quality
+   * Get Complex Words Count
    */
   var getComplexWords = function getComplexWords(wordsList) {
     var wordsComplexCount = 0;
@@ -278,7 +278,7 @@
     for (var key in wordsList) {
       try {
         if (!/^[A-Z]/g.test(wordsList[key])) {
-          var wordSyllables = wordsList[key].match(/[aeuoi]/g).length - 1;
+          var wordSyllables = wordsList[key].match(/[aeiouy]/g).length - 1;
 
           if (/ing$/ig.test(wordsList[key]) || /ed$/ig.test(wordsList[key]) || /es$/ig.test(wordsList[key])) {
             wordSyllables--;
@@ -288,9 +288,7 @@
             wordsComplexCount++;
           }
         }
-      } catch (er) {
-        wordsComplexCount = 0;
-      }
+      } catch (er) {}
     }
 
     return wordsComplexCount;
@@ -312,25 +310,102 @@
   };
 
   /**
-   * Get GFI
+   * Gunning fog index
+   *
+   * https://en.wikipedia.org/wiki/Gunning_fog_index
    */
-  var getGfi = function getGfi(wordsAveragePerSentenceVal, wordsComplexCount, wordsCount) {
-    var gfiVal = (0.4 * (wordsAveragePerSentenceVal + 100 * (wordsComplexCount / wordsCount))).toFixed(2);
 
-    if (isNaN(gfiVal)) {
-      gfiVal = 0;
+  var getGfi = function getGfi(words, sentences, complexWords) {
+    var complexWordWeight = 100;
+    var weight = 0.4; // 04 * ((words / sentences) + (100 * (complex words / words)))
+
+    var val = (weight * (words / sentences + complexWordWeight * (complexWords / words))).toFixed(2);
+
+    if (!val) {
+      val = 0;
     }
 
-    return gfiVal;
+    return val;
+  };
+  /*
+
+  Fog Index 	Reading level by grade
+  17 	College graduate
+  16 	College senior
+  15 	College junior
+  14 	College sophomore
+  13 	College freshman
+  12 	High school senior
+  11 	High school junior
+  10 	High school sophomore
+  9 	High school freshman
+  8 	Eighth grade
+  7 	Seventh grade
+  6 	Sixth grade
+
+  */
+
+  var getGfiResult = function getGfiResult(index) {
+    if (index <= 17 && index > 16) {
+      return 'College graduate';
+    }
+
+    if (index <= 16 && index > 15) {
+      return 'College senior';
+    }
+
+    if (index <= 15 && index > 14) {
+      return 'College junior';
+    }
+
+    if (index <= 14 && index > 13) {
+      return 'College sophomore';
+    }
+
+    if (index <= 13 && index > 12) {
+      return 'College freshman';
+    }
+
+    if (index <= 12 && index > 11) {
+      return 'High school senior';
+    }
+
+    if (index <= 11 && index > 10) {
+      return 'High school junior';
+    }
+
+    if (index <= 10 && index > 9) {
+      return 'High school sophomore';
+    }
+
+    if (index <= 9 && index > 8) {
+      return 'High school freshman';
+    }
+
+    if (index <= 8 && index > 7) {
+      return 'Eighth grade';
+    }
+
+    if (index <= 7 && index > 6) {
+      return 'Seventh grade';
+    }
+
+    if (index <= 6) {
+      return 'Sixth grade';
+    }
+
+    return val;
   };
 
   /**
    * Get CLI
+   *
+   * https://en.wikipedia.org/wiki/Coleman%E2%80%93Liau_index
    */
   var getCli = function getCli(symbolsCount, wordsCount, sentencesCount) {
     var cliVal = (5.88 * (symbolsCount / wordsCount) - 29.6 * (sentencesCount / wordsCount) - 15.8).toFixed(2);
 
-    if (isNaN(cliVal)) {
+    if (!cliVal) {
       cliVal = 0;
     }
 
@@ -352,11 +427,13 @@
 
   /**
    * Get Smog
+   *
+   * https://en.wikipedia.org/wiki/SMOG
    */
   var getSmog = function getSmog(wordsComplexCount, sentencesCount) {
     var smogVal = (1.043 * Math.sqrt(wordsComplexCount * (30 / sentencesCount)) + 3.1291).toFixed(2);
 
-    if (isNaN(smogVal)) {
+    if (!smogVal) {
       smogVal = 0;
     }
 
@@ -477,6 +554,7 @@
     var wordAverageLength = document.getElementById('wordAverageLength');
     var wordsComplex = document.getElementById('wordsComplex');
     var gfi = document.getElementById('gfi');
+    var gfiResult = document.getElementById('gfiResult');
     var cli = document.getElementById('cli');
     var ari = document.getElementById('ari');
     var smog = document.getElementById('smog');
@@ -561,8 +639,9 @@
      * Readability
      */
 
-    var gfiVal = getGfi(wordsAveragePerSentenceVal, wordsComplexCount, wordsCount);
+    var gfiVal = getGfi(wordsCount, sentencesCount, wordsComplexCount);
     gfi.textContent = gfiVal;
+    gfiResult.textContent = getGfiResult(gfiVal);
     var cliVal = getCli(symbolsCount, wordsCount, sentencesCount);
     cli.textContent = cliVal;
     var ariVal = getAri(countLettersAndNumbers, wordsCount, sentencesCount);
